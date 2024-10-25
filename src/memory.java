@@ -1,8 +1,10 @@
 package src;
-import javax.swing.*;
+
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class memory {
 
@@ -10,8 +12,8 @@ public class memory {
     ArrayList<JButton> list = new ArrayList<>(); 
 
     @SuppressWarnings("Convert2Lambda")
-    public memory() {
-        memoryPanel = UIHelper.createPanel(UIHelper.ColorPalette.GREEN, null); 
+    public memory(CardLayout cardLayout, JFrame frame) {
+        memoryPanel = UIHelper.createPanel(UIHelper.ColorPalette.YELLOW, null);
 
         JButton pickCard = UIHelper.createButton("Pick up a card", UIHelper.ColorPalette.BLUE, 100, 50, memoryPanel, 0, 0, 60, 45);
 
@@ -27,10 +29,11 @@ public class memory {
             list.add(memoryButton); 
         }
 
-        mainMenu.addActionListener(new ActionListener() {
-            @SuppressWarnings("override")
+        JButton backButton = UIHelper.createButton("Back to Menu", UIHelper.ColorPalette.RED, 200, 50, memoryPanel, 50, 700, 200, 50);
+        backButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Returning to Main Menu");
+                cardLayout.show(frame.getContentPane(), "Main Menu");  
             }
         });
     }

@@ -1,36 +1,31 @@
 package src;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class war {
 
-    @SuppressWarnings("unused")
-    JFrame mainFrame; 
+    JPanel warPanel;
 
     @SuppressWarnings("Convert2Lambda")
-    public war(JFrame mainFrame) {
-        this.mainFrame = mainFrame;  
+    public war(CardLayout cardLayout, JFrame frame) {
 
-        JFrame f = UIHelper.createFrame(1600, 800, UIHelper.ColorPalette.GREEN, true);
+        warPanel = UIHelper.createPanel(UIHelper.ColorPalette.GREEN, null);
 
-        JButton mainMenu = UIHelper.createButton("Main Menu", UIHelper.ColorPalette.RED, 100, 50, f.getContentPane(), 0, 0, 100, 50);
-        JButton playButton = UIHelper.createButton("Play Card", UIHelper.ColorPalette.BLUE, 400, 250, f.getContentPane(), 300, 200, 400, 250);
+        JButton backButton = UIHelper.createButton("Back to Menu", UIHelper.ColorPalette.RED, 200, 50, warPanel, 50, 700, 200, 50);
+        JButton playButton = UIHelper.createButton("Play Card", UIHelper.ColorPalette.BLUE, 400, 250, warPanel, 300, 200, 400, 250);
 
-        mainMenu.addActionListener(new ActionListener() {
-            @SuppressWarnings("override")
+        backButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.setVisible(true); 
-                f.setVisible(false); 
+                cardLayout.show(frame.getContentPane(), "Main Menu");  
             }
         });
-
-        playButton.addActionListener(new ActionListener() {
-            @SuppressWarnings("override")
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Play Card button clicked");
-            }
-        });
+    }
+    public JPanel getPanel() {
+        return warPanel;
     }
 }
